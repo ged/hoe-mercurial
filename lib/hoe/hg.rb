@@ -52,7 +52,8 @@ class Hoe #:nodoc:
       end
 
       task :release_sanity do
-        unless `hg status` =~ //
+        puts 'doing sanity checks'
+        unless `hg status`.strip.length==0
           abort "Won't release: Dirty index or untracked files present!"
         end
       end

@@ -16,27 +16,12 @@ expect it'll learn a few more tricks in the future.
 If this plugin doesn't see a .hg directory at the root of your
 project, it'll silently deactivate itself.
 
-=== Autogenerating the Changelog
-
-    $ rake hg:changelog
-
-This takes all the commit messages since your last release and formats
-'em into a nice RDoc fragment. If you specify <tt>VERSION</tt>, it'll
-be used in the changelog fragment. If you specify <tt>FROM</tt>, it'll
-be used as a starting point for the changelog instead of your last
-release.
-
-Commits that weren't made by a project developer will be attributed,
-like this:
-
-    * Did a thing with the stuff. [I R Contributor]
-
 === Generating the Manifest
 
     $ rake hg:manifest
 
 This will regenerate <tt>Manifest.txt</tt> using <tt>hg
-ls-files</tt>. It respects Hoe's manifest sort order and excludes.
+ls-files</tt>. It does not respect Hoe's manifest sort order and excludes!
 
 === Tagging and Sanity Checking a Release
 
@@ -53,12 +38,11 @@ work for ancient hg  versions < 1.4.1
 
 == Installation
 
-    $ gem install hoe-git
+    $ gem install hoe-hg
 
 == TODO
 
-* Release tags are sorted lexicographically right now, which won't
-  work for long.
+* I bailed on the auto-generated changelog. 
 
 == License
 
