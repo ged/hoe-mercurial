@@ -5,7 +5,6 @@ require "rubygems"
 require "hoe"
 require "hoe/hg"
 
-ENV['VERSION']=Hoe::Hg::VERSION
 Hoe.plugin :doofus, :hg
 
 
