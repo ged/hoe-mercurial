@@ -1,23 +1,2 @@
-2010-01-15  mml  <mml>
-
-	* .hgignore, Manifest.txt, Rakefile, lib/hoe/hg.rb:
-	removed some comments, ported sanity
-	[64235fa1b635] [tip]
-
-	* Manifest.txt, lib/hoe/hg.rb:
-	ported to use hg
-	[44e73e6cc634]
-
-	* .hgtags:
-	Removed tag bar
-	[48ae61cd50eb]
-
-	* .hgtags:
-	Added tag bar for changeset 5163b27315b4
-	[c2cd50b7e784]
-
-	* .hgignore, CHANGELOG.rdoc, Manifest.txt, README.rdoc, Rakefile,
-	lib/hoe/hg.rb:
-	r1
-	[5163b27315b4] [foo]
-
+=== 1.0.0  / 2010-01-15
+ * A quick and dirty port from hoe-git
