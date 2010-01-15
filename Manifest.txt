@@ -1,0 +1,3 @@
+CHANGELOG.rdoc
+lib/hoe/hg.rb
+Manifest.txt
