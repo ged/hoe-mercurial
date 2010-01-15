@@ -1,132 +1,83 @@
+require 'ruby-debug'
 class Hoe #:nodoc:
 
   # This module is a Hoe plugin. You can set its attributes in your
   # Rakefile Hoe spec, like this:
   #
-  #    Hoe.plugin :git
+  #    Hoe.plugin :hg
   #
   #    Hoe.spec "myproj" do
-  #      self.git_release_tag_prefix  = "REL_"
-  #      self.git_remotes            << "myremote"
+  #      self.hg_release_tag_prefix  = "REL_"
+  #      self.hg_repo           = "ssh://hg@bigbucket.org/me/myrepo"
+  #      self.hg_release_branch  = "default"
   #    end
   #
   #
   # === Tasks
   #
-  # git:changelog:: Print the current changelog.
-  # git:manifest::  Update the manifest with Git's file list.
-  # git:tag::       Create and push a tag.
+  # hg:changelog:: Print the current changelog.
+  # hg:manifest::  Update the manifest with Hg's file list.
+  # hg:tag::       Create and push a tag.
 
-  module Git
+  module Hg
 
     # Duh.
-    VERSION = "1.3.0"
+    VERSION = "1.0.0"
 
     # What do you want at the front of your release tags?
     # [default: <tt>"v"</tt>]
 
-    attr_accessor :git_release_tag_prefix
+    attr_accessor :hg_release_tag_prefix
 
-    # Which remotes do you want to push tags, etc. to?
-    # [default: <tt>%w(origin)</tt>]
+    attr_accessor :hg_repo, :hg_release_branch
 
-    attr_accessor :git_remotes
-
-    def initialize_git #:nodoc:
-      self.git_release_tag_prefix = "v"
-      self.git_remotes            = %w(origin)
+    def initialize_hg #:nodoc:
+      self.hg_release_tag_prefix = "r"
+      self.hg_release_branch = "default"
     end
 
-    def define_git_tasks #:nodoc:
-      return unless File.exist? ".git"
+    def define_hg_tasks #:nodoc:
+      return unless File.exist? ".hg"
 
-      desc "Print the current changelog."
-      task "git:changelog" do
-        tags  = git_tags
-        tag   = ENV["FROM"] || tags.last
-        range = [tag, "HEAD"].compact.join ".."
-        cmd   = "git log #{range} '--format=tformat:%s|||%aN|||%aE'"
-        now   = Time.new.strftime "%Y-%m-%d"
-
-        changes = `#{cmd}`.split("\n").map do |line|
-          msg, author, email = line.split("|||").map { |e| e.empty? ? nil : e }
-
-          developer = self.author.include?(author) ||
-            self.email.include?(email)
-
-          msg << " [#{author || email}]" unless developer
-          msg
-        end
-
-        next if changes.empty?
-
-        puts "=== #{ENV['VERSION'] || 'NEXT'} / #{now}"
-        puts
-
-        changes.each { |change| puts "* #{change}" }
-        puts
+      desc "Print the current log."
+      task "hg:log" do
+        cmd   = "hg log -r tip  --style=changelog"
+        changelog = `#{cmd}`
+        puts changelog
       end
 
-      desc "Update the manifest with Git's file list. Use Hoe's excludes."
-      task "git:manifest" do
+      desc "Update the manifest with Hg's file list. Use Hoe's excludes."
+      task "hg:manifest" do
         with_config do |config, _|
-          files = `git ls-files`.split "\n"
-          files.reject! { |f| f =~ config["exclude"] }
-
+          files = `hg manifest`.split "\n"
           File.open "Manifest.txt", "w" do |f|
             f.puts files.sort.join("\n")
           end
         end
       end
 
-      desc "Create and push a TAG " +
-           "(default #{git_release_tag_prefix}#{version})."
+      desc "Create and push a TAG (default #{hg_release_tag_prefix}#{version})."
 
-      task "git:tag" do
+      task "hg:tag" do
         tag   = ENV["TAG"]
-        tag ||= "#{git_release_tag_prefix}#{ENV["VERSION"] || version}"
+        tag ||= "#{hg_release_tag_prefix}#{ENV["VERSION"] || version}"
 
-        git_tag_and_push tag
+        hg_tag_and_push tag
       end
 
       task :release_sanity do
-        unless `git status` =~ /^nothing to commit/
+        unless `hg status` =~ /^nothing to commit/
           abort "Won't release: Dirty index or untracked files present!"
         end
       end
 
-      task :release => "git:tag"
+      task :release => "hg:tag"
     end
 
-    def git_svn?
-      File.exist? ".git/svn"
+    def hg_tag_and_push branch
+      sh "hg tag -m 'tagging #{tag} for release'"
+      sh "hg push #{hg_repo} -r #{tag}" 
     end
 
-    def git_tag_and_push tag
-      if git_svn?
-        sh "git svn tag #{tag} -m 'Tagging #{tag} release.'"
-      else
-        sh "git tag -f #{tag}"
-        git_remotes.each { |remote| sh "git push -f #{remote} tag #{tag}" }
-      end
-    end
-
-    def git_tags # FIX: order by date, not alpha!
-      if git_svn?
-        source = `git config svn-remote.svn.tags`.strip
-
-        unless source =~ %r{refs/remotes/(.*)/\*$}
-          abort "Can't discover git-svn tag scheme from #{source}"
-        end
-
-        prefix = $1
-
-        `git branch -r`.split("\n").
-          collect { |t| t.strip }.
-          select  { |t| t =~ %r{^#{prefix}/#{git_release_tag_prefix}} }
-      else
-        `git tag -l '#{git_release_tag_prefix}*'`.split "\n"
-      end
-    end
   end
 end

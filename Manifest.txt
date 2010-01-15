@@ -1,3 +1,4 @@
 CHANGELOG.rdoc
-lib/hoe/hg.rb
 Manifest.txt
+README.rdoc
+Rakefile
