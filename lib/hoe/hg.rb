@@ -1,4 +1,3 @@
-require 'ruby-debug'
 class Hoe #:nodoc:
 
   # This module is a Hoe plugin. You can set its attributes in your
@@ -21,14 +20,9 @@ class Hoe #:nodoc:
 
   module Hg
 
-    # Duh.
     VERSION = "1.0.0"
 
-    # What do you want at the front of your release tags?
-    # [default: <tt>"v"</tt>]
-
     attr_accessor :hg_release_tag_prefix
-
     attr_accessor :hg_repo, :hg_release_branch
 
     def initialize_hg #:nodoc:
@@ -66,7 +60,7 @@ class Hoe #:nodoc:
       end
 
       task :release_sanity do
-        unless `hg status` =~ /^nothing to commit/
+        unless `hg status` =~ //
           abort "Won't release: Dirty index or untracked files present!"
         end
       end

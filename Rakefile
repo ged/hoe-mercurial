@@ -3,7 +3,9 @@ require 'rake/clean'
 CLEAN.include %w(**/*~ **/*.orig)
 require "rubygems"
 require "hoe"
+require "hoe/hg"
 
+ENV['VERSION']=Hoe::Hg::VERSION
 Hoe.plugin :doofus, :hg
 
 Hoe.spec "hoe-hg" do
