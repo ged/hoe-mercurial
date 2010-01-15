@@ -4,9 +4,11 @@
 
 == Description
 
-A set of Hoe plugins for tighter Mercurial integration. Provides tasks to
+A Hoe plugin for Mercurial integration. Provides tasks to
 automate release tagging and pushing and changelog generation. I
 expect it'll learn a few more tricks in the future.
+
+Stolen wholesale from hoe-git.
 
 == Examples
 
