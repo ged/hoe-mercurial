@@ -1,2 +1,4 @@
 === 1.0.0  / 2010-01-15
  * A quick and dirty port from hoe-git
+=== 1.0.3  / 2010-01-15
+ * various changes to make things actually work
