@@ -14,7 +14,6 @@ class Hoe #:nodoc:
   #
   # === Tasks
   #
-  # hg:changelog:: Print the current changelog.
   # hg:manifest::  Update the manifest with Hg's file list.
   # hg:tag::       Create and push a tag.
 
@@ -33,14 +32,7 @@ class Hoe #:nodoc:
     def define_hg_tasks #:nodoc:
       return unless File.exist? ".hg"
 
-      desc "Print the current log."
-      task "hg:log" do
-        cmd   = "hg log -r tip  --style=changelog"
-        changelog = `#{cmd}`
-        puts changelog
-      end
-
-      desc "Update the manifest with Hg's file list. Use Hoe's excludes."
+      desc "Update the manifest with Hg's file list."
       task "hg:manifest" do
         with_config do |config, _|
           files = `hg manifest`.split "\n"
