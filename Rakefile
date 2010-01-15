@@ -8,6 +8,7 @@ require "hoe/hg"
 ENV['VERSION']=Hoe::Hg::VERSION
 Hoe.plugin :doofus, :hg
 
+
 Hoe.spec "hoe-hg" do
   developer "McClain Looney", "m@loonsoft.com"
 

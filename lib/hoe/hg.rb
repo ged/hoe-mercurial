@@ -19,7 +19,7 @@ class Hoe #:nodoc:
 
   module Hg
 
-    VERSION = "1.0.0"
+    VERSION = "1.0.2"
 
     attr_accessor :hg_release_tag_prefix
     attr_accessor :hg_repo, :hg_release_branch
@@ -27,6 +27,7 @@ class Hoe #:nodoc:
     def initialize_hg #:nodoc:
       self.hg_release_tag_prefix = "r"
       self.hg_release_branch = "default"
+      self.hg_repo = ""#use whatever is configured in hgrc
     end
 
     def define_hg_tasks #:nodoc:
@@ -45,7 +46,7 @@ class Hoe #:nodoc:
       desc "Create and push a TAG (default #{hg_release_tag_prefix}#{version})."
 
       task "hg:tag" do
-        tag   = ENV["TAG"]
+        puts "tagging and pushing #{hg_release_branch} to '#{hg_repo}' or whatever you have configured in .hg/hgrc."
         tag ||= "#{hg_release_tag_prefix}#{ENV["VERSION"] || version}"
 
         hg_tag_and_push tag
@@ -61,9 +62,9 @@ class Hoe #:nodoc:
       task :release => "hg:tag"
     end
 
-    def hg_tag_and_push branch
-      sh "hg tag -m 'tagging #{tag} for release'"
-      sh "hg push #{hg_repo} -r #{tag}" 
+    def hg_tag_and_push tag
+      sh "hg tag -m 'tagging #{tag} for release' #{tag}"
+      sh "hg push #{hg_repo} -r #{hg_release_branch}" 
     end
 
   end
