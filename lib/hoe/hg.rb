@@ -19,7 +19,7 @@ class Hoe #:nodoc:
 
   module Hg
 
-    VERSION = "1.0.4"
+    VERSION = "1.0.5"
 
     attr_accessor :hg_release_tag_prefix
     attr_accessor :hg_repo, :hg_release_branch

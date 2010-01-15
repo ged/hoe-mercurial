@@ -6,3 +6,6 @@
 
 === 1.0.4  / 2010-01-15
  * bleh, keeping changelogs updated is a chore.
+
+=== 1.0.5  / 2010-01-15
+ * ok, only for major releases from now on. this is total crap.

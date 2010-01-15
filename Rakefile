@@ -6,6 +6,7 @@ require "hoe"
 require "hoe/hg"
 
 Hoe.plugin :doofus, :hg
+Hoe.plugins.delete :rubyforge
 
 
 Hoe.spec "hoe-hg" do
