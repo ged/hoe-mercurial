@@ -17,7 +17,7 @@ end
 Hoe.plugin :doofus, :hg
 Hoe.plugins.delete :rubyforge
 
-Hoe.spec "hoe-hg" do
+hoespec = Hoe.spec "hoe-hg" do
   developer "McClain Looney", "m@loonsoft.com"
 
   self.extra_rdoc_files = FileList["*.rdoc"]
@@ -30,4 +30,6 @@ end
 CLEAN.include %w(**/*~ **/*.orig)
 
 task :ci => 'hg:checkin'
+
+ENV['VERSION'] ||= hoespec.spec.version.to_s
 
