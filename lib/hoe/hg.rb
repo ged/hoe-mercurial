@@ -357,7 +357,7 @@ class Hoe #:nodoc:
     ### Read the list of existing tags and return them as an Array
     def get_tags
       taglist = read_command_output( 'hg', 'tags' )
-      return taglist.split( /\n/ )
+      return taglist.split( /\n/ ).collect {|tag| tag[/^\S+/] }
     end
 
 
