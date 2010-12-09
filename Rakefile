@@ -1,13 +1,21 @@
-$: << "lib"
+#!rake
+#coding: utf-8
+
 require 'rake/clean'
-CLEAN.include %w(**/*~ **/*.orig)
 require "rubygems"
 require "hoe"
-require "hoe/hg"
+
+# 1.9.2 and later require explicit relative require
+if defined?( require_relative )
+	$stderr.puts "Requiring relative lib/hoe/hg..."
+	require_relative "lib/hoe/hg"
+	$stderr.puts "  require done."
+else
+	$LOAD_PATH.unshift( 'lib' )
+end
 
 Hoe.plugin :doofus, :hg
 Hoe.plugins.delete :rubyforge
-
 
 Hoe.spec "hoe-hg" do
   developer "McClain Looney", "m@loonsoft.com"
@@ -18,3 +26,8 @@ Hoe.spec "hoe-hg" do
 
   extra_deps << ["hoe", ">= 2.2.0"]
 end
+
+CLEAN.include %w(**/*~ **/*.orig)
+
+task :ci => 'hg:checkin'
+

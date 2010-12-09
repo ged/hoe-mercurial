@@ -2,3 +2,4 @@ syntax:glob
 *~
 *.orig
 pkg
+^commit\-msg\.txt$
