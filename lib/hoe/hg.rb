@@ -502,8 +502,10 @@ class Hoe #:nodoc:
           end
 
           # Sign the current rev
-          log "Signing rev #{rev}"
-          run 'hg', 'sign'
+          if self.hg_sign_tags
+            log "Signing rev #{rev}"
+            run 'hg', 'sign'
+          end
 
           # Tag the current rev
           log "Tagging rev #{rev} as #{pkg_version_tag}"
