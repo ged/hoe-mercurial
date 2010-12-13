@@ -304,7 +304,8 @@ class Hoe #:nodoc:
 
   ### Mercurial command wrapper functions.
   module MercurialHelpers
-    include FileUtils
+    include FileUtils,
+            Hoe::RakeHelpers
     include FileUtils::DryRun if Rake.application.options.dryrun
 
     # The name of the ignore file
@@ -351,6 +352,13 @@ class Hoe #:nodoc:
     def get_current_rev
       id = read_command_output( 'hg', '-q', 'identify' )
       return id.chomp
+    end
+
+
+    ### Return the current numeric (local) rev number
+    def get_numeric_rev
+      id = read_command_output( 'hg', '-q', 'identify', '-n' )
+      return id.chomp[ /^(\d+)/, 1 ] || '0'
     end
 
 
@@ -453,10 +461,11 @@ class Hoe #:nodoc:
 
     ### Set up defaults
     def initialize_hg #:nodoc:
-      self.hg_release_tag_prefix = "r"
-      self.hg_release_branch = "default"
-      self.hg_repo = "" # use whatever is configured in hgrc
-      self.hg_sign_tags = false
+      # Follow semantic versioning tagging specification (http://semver.org/)
+      self.hg_release_tag_prefix = "v"
+      self.hg_release_branch     = "default"
+      self.hg_repo               = "" # use whatever is configured in hgrc
+      self.hg_sign_tags          = false
     end
 
 
@@ -624,7 +633,8 @@ class Hoe #:nodoc:
         end
       end
 
-      # Hoe release hook -- check and prep the release 
+      # Add a top-level 'ci' task for checkin
+      task :ci => 'hg:checkin'
       task :prerelease => 'hg:prep_release'
 
     rescue Exception => err
