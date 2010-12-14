@@ -14,6 +14,7 @@ else
 	$LOAD_PATH.unshift( 'lib' )
 end
 
+require 'hoe/hg'
 include Hoe::MercurialHelpers
 
 Hoe.plugin :doofus, :hg
