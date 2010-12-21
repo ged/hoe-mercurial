@@ -635,6 +635,8 @@ class Hoe #:nodoc:
 
       # Add a top-level 'ci' task for checkin
       task :ci => 'hg:checkin'
+
+      # Hook the release task and prep the repo first
       task :prerelease => 'hg:prep_release'
 
     rescue Exception => err

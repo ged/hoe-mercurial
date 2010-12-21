@@ -12,17 +12,18 @@ if defined?( require_relative )
 	$stderr.puts "  require done."
 else
 	$LOAD_PATH.unshift( 'lib' )
+	require 'hoe/hg'
 end
 
-require 'hoe/hg'
 include Hoe::MercurialHelpers
 
-Hoe.plugin :doofus, :hg
+Hoe.plugin :hg
+Hoe.plugin :signing
+
 Hoe.plugins.delete :rubyforge
 
 
-hoespec = Hoe.spec "hoe-hg" do
-  developer "McClain Looney", "m@loonsoft.com"
+hoespec = Hoe.spec "hoe-mercurial" do
   developer "Michael Granger", "ged@FaerieMUD.org"
 
   self.extra_rdoc_files = FileList["*.rdoc"]
@@ -33,12 +34,6 @@ hoespec = Hoe.spec "hoe-hg" do
 
   extra_deps << ["hoe", "~> 2.8.0"]
 end
-
-
-CLEAN.include %w(**/*~ **/*.orig)
-
-
-ENV['VERSION'] ||= hoespec.spec.version.to_s
 
 
 ### Task: prerelease
