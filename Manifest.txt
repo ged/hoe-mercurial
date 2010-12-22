@@ -1,4 +1,5 @@
-lib/hoe/hg.rb
-CHANGELOG.rdoc
-README.rdoc
+lib/hoe/mercurial.rb
+ChangeLog
+History.md
+README.md
 Rakefile

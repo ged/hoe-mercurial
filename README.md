@@ -1,9 +1,9 @@
-= (Another) Mercurial Plugin for hoe
+# (Another) Mercurial Plugin for hoe
 
 * http://bitbucket.org/ged/hoe-mercurial
 
 
-== Description
+## Description
 
 This is my fork of the 'hoe-hg' plugin. I forked it because I use 
 quite a few additional Mercurial tasks for my development workflow 
@@ -11,7 +11,7 @@ than are provided by the original, and I thought they'd possibly
 be useful to someone else.
 
 
-== Examples
+## Examples
 
     # in your Rakefile
     Hoe.plugin :mercurial
@@ -20,7 +20,7 @@ If there isn't a '.hg' directory at the root of your project, it won't
 be activated.
 
 
-=== Committing
+### Committing
 
     $ rake hg:checkin
 
@@ -35,7 +35,7 @@ run tests, lint, or whatever before checking in), builds a commit message
 file out of the diff that's being committed and invokes your editor on it, 
 does the checkin, then offers to push back to the default repo.
 
-=== Pre-Release Hook
+### Pre-Release Hook
 
 This plugin also hooks Hoe's 'prerelease' task to tag and (optionally) sign 
 the rev being released, then push to the default repo. If there are any 
@@ -43,7 +43,7 @@ uncommitted files, it also verifies that you want to release with
 uncommitted changes, and ensures you've bumped the version number by 
 checking for an existing tag with the same version.
 
-=== Other Tasks
+### Other Tasks
 
 It also provides other tasks for pulling, updating, pushing, etc. These
 aren't very useful on their own, as it's usually just as easy to do the
@@ -51,18 +51,18 @@ same thing yourself with 'hg', but they're intended to be used as
 dependencies in other tasks. 
 
 
-== Dependencies
+## Dependencies
 
-Hoe and Mercurial, obviously. I wouldn't be surprised if things don't quite
-work for ancient hg  versions < 1.4.1
-
-
-== Installation
-
-    $ gem install hoe-hg
+Hoe and Mercurial, obviously. I haven't tested these tasks with Mercurial
+versions earlier than 1.6 or so.
 
 
-== License
+## Installation
+
+    $ gem install hoe-mercurial
+
+
+## License
 
 The original is used under the terms of the following license:
 

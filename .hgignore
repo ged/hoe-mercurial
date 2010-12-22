@@ -1,5 +1,5 @@
-syntax:glob
-*~
-*.orig
-pkg
+~$
+\.orig$
+^pkg/
 ^commit\-msg\.txt$
+^ChangeLog$
