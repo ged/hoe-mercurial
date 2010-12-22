@@ -5,16 +5,19 @@
 
 ## Description
 
-This is my fork of the 'hoe-hg' plugin. I forked it because I use 
-quite a few additional Mercurial tasks for my development workflow 
-than are provided by the original, and I thought they'd possibly 
-be useful to someone else.
+This is a fork of the [hoe-hg](https://bitbucket.org/mml/hoe-hg) 
+plugin. I forked it because I use quite a few additional Mercurial 
+tasks for my development workflow than are provided by the original, 
+and I thought they'd possibly be useful to someone else.
+
+I've offered to push my changes back up to the original, but I gave
+up waiting for a response.
 
 
 ## Examples
 
-    # in your Rakefile
-    Hoe.plugin :mercurial
+	# in your Rakefile
+	Hoe.plugin :mercurial
 
 If there isn't a '.hg' directory at the root of your project, it won't 
 be activated.
@@ -22,26 +25,33 @@ be activated.
 
 ### Committing
 
-    $ rake hg:checkin
+	$ rake hg:checkin
 
-    -or-
+-or-
 
-    $ rake ci
+	$ rake ci
 
 This will offer to pull and merge from the default repo (if there is one), 
 check for any unregistered files and offer to add/ignore/delete or 
-temporarily skip them, run the :precheckin task (which you can use to
+temporarily skip them, run the **:precheckin** task (which you can use to
 run tests, lint, or whatever before checking in), builds a commit message
 file out of the diff that's being committed and invokes your editor on it, 
 does the checkin, then offers to push back to the default repo.
 
 ### Pre-Release Hook
 
-This plugin also hooks Hoe's 'prerelease' task to tag and (optionally) sign 
+This plugin also hooks Hoe's **prerelease** task to tag and (optionally) sign 
 the rev being released, then push to the default repo. If there are any 
 uncommitted files, it also verifies that you want to release with 
 uncommitted changes, and ensures you've bumped the version number by 
 checking for an existing tag with the same version.
+
+To sign tagged revisions using 'hg sign', do this in your hoespec:
+
+	self.hg_sign_tags = true
+
+This requires that 'hg sign' work on its own, of course.
+
 
 ### Other Tasks
 
@@ -49,6 +59,8 @@ It also provides other tasks for pulling, updating, pushing, etc. These
 aren't very useful on their own, as it's usually just as easy to do the
 same thing yourself with 'hg', but they're intended to be used as 
 dependencies in other tasks. 
+
+A 'rake -T' will show them all; they're all in the 'hg' namespace.
 
 
 ## Dependencies
@@ -59,37 +71,37 @@ versions earlier than 1.6 or so.
 
 ## Installation
 
-    $ gem install hoe-mercurial
+	$ gem install hoe-mercurial
 
 
 ## License
 
 The original is used under the terms of the following license:
 
-  Copyright 2009 McClain Looney (m@loonsoft.com)
-  
-  Permission is hereby granted, free of charge, to any person obtaining
-  a copy of this software and associated documentation files (the
-  'Software'), to deal in the Software without restriction, including
-  without limitation the rights to use, copy, modify, merge, publish,
-  distribute, sublicense, and/or sell copies of the Software, and to
-  permit persons to whom the Software is furnished to do so, subject to
-  the following conditions:
-  
-  The above copyright notice and this permission notice shall be
-  included in all copies or substantial portions of the Software.
-
-  THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-  CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+	Copyright 2009 McClain Looney (m@loonsoft.com)
+	
+	Permission is hereby granted, free of charge, to any person obtaining
+	a copy of this software and associated documentation files (the
+	'Software'), to deal in the Software without restriction, including
+	without limitation the rights to use, copy, modify, merge, publish,
+	distribute, sublicense, and/or sell copies of the Software, and to
+	permit persons to whom the Software is furnished to do so, subject to
+	the following conditions:
+	
+	The above copyright notice and this permission notice shall be
+	included in all copies or substantial portions of the Software.
+	
+	THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+	EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+	IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+	CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+	TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+	SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 My modifications are:
 
-  Copyright © 2010 Michael Granger <ged@FaerieMUD.org>
+	Copyright © 2010 Michael Granger <ged@FaerieMUD.org>
 
 and are licensed under the same terms as the original.
 

@@ -28,7 +28,7 @@ hoespec = Hoe.spec "hoe-mercurial" do
 	self.history_file     = "History.md"
 	self.readme_file      = "README.md"
 
-	self.hg_sign_tags     = false
+	self.hg_sign_tags     = true
 
 	extra_deps << ["hoe", "~> 2.8.0"]
 end
