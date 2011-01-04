@@ -24,6 +24,7 @@ hoespec = Hoe.spec "hoe-mercurial" do
 	extra_deps << ["hoe", "~> 2.8.0"]
 end
 
+ENV['VERSION'] = hoespec.spec.version.to_s
 
 include Hoe::MercurialHelpers
 
