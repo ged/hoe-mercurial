@@ -579,7 +579,7 @@ class Hoe
 
 
 				desc "Check the current code in if tests pass"
-				task :checkin => ['hg:pull', 'hg:newfiles', :precheckin, COMMIT_MSG_FILE] do
+				task :checkin => [:pull, :newfiles, :precheckin, COMMIT_MSG_FILE] do
 					targets = get_target_args()
 					$stderr.puts '---', File.read( COMMIT_MSG_FILE ), '---'
 					ask_for_confirmation( "Continue with checkin?" ) do
