@@ -4,16 +4,7 @@
 require 'hoe'
 require 'rake/clean'
 
-# 1.9.2 and later require explicit relative require
-if defined?( require_relative )
-	$stderr.puts "Requiring relative lib/hoe/mercurial..."
-	require_relative "lib/hoe/mercurial"
-	$stderr.puts "	require done."
-else
-	$LOAD_PATH.unshift( 'lib' )
-	require 'hoe/mercurial'
-end
-
+Hoe.add_include_dirs 'lib/hoe'
 
 Hoe.plugin :mercurial
 Hoe.plugin :signing
