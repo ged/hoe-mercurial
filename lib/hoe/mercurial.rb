@@ -438,13 +438,12 @@ class Hoe
 		include Hoe::RakeHelpers,
 		        Hoe::MercurialHelpers
 
-		VERSION = "1.1.1"
+		VERSION = "1.2.0"
 
 		# The name of the file to edit for the commit message
 		COMMIT_MSG_FILE = 'commit-msg.txt'
 
 		attr_accessor :hg_release_tag_prefix
-		attr_accessor :hg_repo, :hg_release_branch
 		attr_accessor :hg_sign_tags
 
 
@@ -452,8 +451,10 @@ class Hoe
 		def initialize_mercurial
 			# Follow semantic versioning tagging specification (http://semver.org/)
 			self.hg_release_tag_prefix = "v"
-			self.hg_release_branch     = "default"
 			self.hg_sign_tags          = false
+
+			self.extra_dev_deps << ['hoe-mercurial', "~> #{VERSION}"] unless
+				self.name == 'hoe-mercurial'
 		end
 
 
