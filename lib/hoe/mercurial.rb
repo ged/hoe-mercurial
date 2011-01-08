@@ -613,6 +613,7 @@ class Hoe
 			end
 
 			# Add a top-level 'ci' task for checkin
+			desc "Check in your changes"
 			task :ci => 'hg:checkin'
 
 			# Hook the release task and prep the repo first

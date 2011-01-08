@@ -4,7 +4,7 @@
 require 'hoe'
 require 'rake/clean'
 
-Hoe.add_include_dirs 'lib/hoe'
+Hoe.add_include_dirs 'lib'
 
 Hoe.plugin :mercurial
 Hoe.plugin :signing
