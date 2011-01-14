@@ -433,7 +433,7 @@ class Hoe
 	end # module MercurialHelpers
 
 
-
+	### Hoe plugin module
 	module Mercurial
 		include Hoe::RakeHelpers,
 		        Hoe::MercurialHelpers
@@ -460,7 +460,7 @@ class Hoe
 
 		### Hoe hook -- Define Rake tasks when the plugin is loaded.
 		def define_mercurial_tasks
-			return unless File.exist? ".hg"
+			return unless File.exist?( ".hg" )
 
 			file COMMIT_MSG_FILE do |task|
 				edit_commit_log( task.name )
@@ -619,7 +619,7 @@ class Hoe
 			# Hook the release task and prep the repo first
 			task :prerelease => 'hg:prep_release'
 
-		rescue Exception => err
+		rescue ::Exception => err
 			$stderr.puts "%s while defining Mercurial tasks: %s" % [ err.class.name, err.message ]
 			raise
 		end

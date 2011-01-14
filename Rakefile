@@ -13,7 +13,7 @@ Hoe.plugins.delete :rubyforge
 
 ### Main spec
 hoespec = Hoe.spec "hoe-mercurial" do
-	developer "Michael Granger", "ged@FaerieMUD.org"
+	self.developer "Michael Granger", "ged@FaerieMUD.org"
 
 	self.extra_rdoc_files = FileList["*.rdoc"]
 	self.history_file     = "History.md"
@@ -21,7 +21,9 @@ hoespec = Hoe.spec "hoe-mercurial" do
 
 	self.hg_sign_tags     = true
 
-	extra_deps << ["hoe", "~> 2.8.0"]
+	self.extra_deps.push *{
+		'hoe' => "~> #{Hoe::VERSION}",
+	}
 end
 
 ENV['VERSION'] = hoespec.spec.version.to_s
