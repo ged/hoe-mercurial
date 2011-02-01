@@ -22,7 +22,7 @@ hoespec = Hoe.spec "hoe-mercurial" do
 	self.hg_sign_tags     = true
 
 	self.extra_deps.push *{
-		'hoe' => "~> #{Hoe::VERSION}",
+		'hoe' => "~> #{Hoe::VERSION[ /\d+\.\d+/ ]}",
 	}
 end
 
