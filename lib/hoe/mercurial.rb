@@ -460,7 +460,8 @@ class Hoe
 
 		### Hoe hook -- Define Rake tasks when the plugin is loaded.
 		def define_mercurial_tasks
-			return unless File.exist?( ".hg" )
+			return unless File.exist?( ".hg" ) &&
+			 	!Rake::Task.task_defined?( 'hg:checkin' )
 
 			file COMMIT_MSG_FILE do |task|
 				edit_commit_log( task.name )

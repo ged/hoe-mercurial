@@ -19,11 +19,10 @@ hoespec = Hoe.spec "hoe-mercurial" do
 	self.history_file     = "History.md"
 	self.readme_file      = "README.md"
 
-	self.hg_sign_tags     = true
+	self.spec_extras[:licenses] = ["BSD"]
+	self.hg_sign_tags = true
 
-	self.extra_deps.push *{
-		'hoe' => "~> #{Hoe::VERSION[ /\d+\.\d+/ ]}",
-	}
+	self.dependency 'hoe', "~> #{Hoe::VERSION[ /\d+\.\d+/ ]}"
 end
 
 ENV['VERSION'] = hoespec.spec.version.to_s
@@ -31,7 +30,7 @@ ENV['VERSION'] = hoespec.spec.version.to_s
 include Hoe::MercurialHelpers
 
 ### Task: prerelease
-desc "Append the package build number to package versions"
+desc "Append the package build number to prerelease package versions"
 task :pre do
 	rev = get_numeric_rev()
 	trace "Current rev is: %p" % [ rev ]
