@@ -438,7 +438,7 @@ class Hoe
 		include Hoe::RakeHelpers,
 		        Hoe::MercurialHelpers
 
-		VERSION = '1.2.1'
+		VERSION = '1.2.2'
 
 		# The name of the file to edit for the commit message
 		COMMIT_MSG_FILE = 'commit-msg.txt'
