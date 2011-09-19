@@ -55,6 +55,7 @@ file 'ChangeLog' => '.hg/branch' do |task|
 end
 
 # Rebuild the ChangeLog immediately before release
-task :prerelease => 'ChangeLog'
+task :prerelease => [ :check_history, 'ChangeLog' ]
+
 
 

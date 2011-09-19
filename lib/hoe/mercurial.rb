@@ -458,6 +458,26 @@ class Hoe
 		end
 
 
+		### Read the list of tags and return any that don't have a corresponding section
+		### in the history file.
+		def get_unhistoried_version_tags
+			prefix = self.hg_release_tag_prefix
+			tag_pattern = /#{}\d+(\.\d+)+/
+			release_tags = get_tags().grep( /^#{tag_pattern}$/ )
+
+			IO.readlines( self.history_file ).each do |line|
+				if line =~ /^(?:h\d\.|#+|=+)\s+(#{tag_pattern})\s+/
+					trace "  found an entry for tag %p: %p" % [ $1, line ]
+					release_tags.delete( $1 )
+				else
+					trace "  no tag on line %p" % [ line ]
+				end
+			end
+
+			return release_tags
+		end
+
+
 		### Hoe hook -- Define Rake tasks when the plugin is loaded.
 		def define_mercurial_tasks
 			return unless File.exist?( ".hg" ) &&
@@ -619,6 +639,16 @@ class Hoe
 
 			# Hook the release task and prep the repo first
 			task :prerelease => 'hg:prep_release'
+
+			desc "Check the history file to ensure it contains an entry for each release tag"
+			task :check_history do
+				log "Checking history..."
+				missing_tags = get_unhistoried_version_tags()
+
+				return if missing_tags.empty?
+				abort "%s needs updating; missing entries for tags: %p" %
+				 	[ self.history_file, missing_tags ]
+			end
 
 		rescue ::Exception => err
 			$stderr.puts "%s while defining Mercurial tasks: %s" % [ err.class.name, err.message ]
