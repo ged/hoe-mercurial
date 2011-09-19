@@ -462,10 +462,12 @@ class Hoe
 
 		### Read the list of tags and return any that don't have a corresponding section
 		### in the history file.
-		def get_unhistoried_version_tags
+		def get_unhistoried_version_tags( include_pkg_version=true )
 			prefix = self.hg_release_tag_prefix
 			tag_pattern = /#{}\d+(\.\d+)+/
 			release_tags = get_tags().grep( /^#{tag_pattern}$/ )
+
+			release_tags << "#{hg_release_tag_prefix}#{version}" if include_pkg_version
 
 			IO.readlines( self.history_file ).each do |line|
 				if line =~ /^(?:h\d\.|#+|=+)\s+(#{tag_pattern})\s+/
@@ -513,7 +515,7 @@ class Hoe
 					end
 
 					# Ensure that the History file contains an entry for every release
-					Rake::Task[ 'hg:check_history' ].invoke if self.check_history_on_release
+					Rake::Task[ 'check_history' ].invoke if self.check_history_on_release
 
 					# Sign the current rev
 					if self.hg_sign_tags
@@ -650,9 +652,10 @@ class Hoe
 				log "Checking history..."
 				missing_tags = get_unhistoried_version_tags()
 
-				return if missing_tags.empty?
-				abort "%s needs updating; missing entries for tags: %p" %
-				 	[ self.history_file, missing_tags ]
+				unless missing_tags.empty?
+					abort "%s needs updating; missing entries for tags: %p" %
+				 		[ self.history_file, missing_tags ]
+				end
 			end
 
 		rescue ::Exception => err
