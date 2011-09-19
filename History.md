@@ -1,3 +1,9 @@
+## v1.3.0 [2011-09-19] Michael Granger <ged@FaerieMUD.org>
+
+Added a new task :check_history, and a new config option 'check_history_on_release'
+for ensuring the History file is updated before releasing.
+
+
 ## v1.2.1 [2011-02-01] Michael Granger <ged@FaerieMUD.org>
 
 Bugfixes:

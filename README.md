@@ -46,6 +46,21 @@ uncommitted files, it also verifies that you want to release with
 uncommitted changes, and ensures you've bumped the version number by 
 checking for an existing tag with the same version.
 
+If you also wish to check the History file to ensure that you have an 
+entry for each release tag, add this to your hoespec:
+
+    self.check_history_on_release = true
+
+You can also invoke or add the ':check_history' task as a dependency
+yourself if you wish to check it at other times.
+
+It expects lines like:
+
+    == v1.3.0 <other stuff>
+
+to be in your History file. Markdown, RDoc, and Textile headers are
+all supported.
+
 To sign tagged revisions using 'hg sign', do this in your hoespec:
 
 	self.hg_sign_tags = true
