@@ -4,6 +4,11 @@ Added a new task :check_history, and a new config option 'check_history_on_relea
 for ensuring the History file is updated before releasing.
 
 
+## v1.2.2 [2011-08-22] Michael Granger <ged@FaerieMUD.org>
+
+Don't overlay existing mercurial tasks if an 'hg:checkin' task already exists.
+
+
 ## v1.2.1 [2011-02-01] Michael Granger <ged@FaerieMUD.org>
 
 Bugfixes:
@@ -12,6 +17,7 @@ Bugfixes:
 * Consistency fixes.
 * Fixed the add_include_dirs call, describe the 'ci' task
 * Updated hoe dependency
+
 
 ## v1.2.0 [2011-01-05] Michael Granger <ged@FaerieMUD.org>
 
