@@ -445,15 +445,17 @@ class Hoe
 
 		attr_accessor :hg_release_tag_prefix
 		attr_accessor :hg_sign_tags
+		attr_accessor :check_history_on_release
 
 
 		### Set up defaults
 		def initialize_mercurial
 			# Follow semantic versioning tagging specification (http://semver.org/)
-			self.hg_release_tag_prefix = "v"
-			self.hg_sign_tags          = false
+			self.hg_release_tag_prefix    = "v"
+			self.hg_sign_tags             = false
+			self.check_history_on_release = false
 
-			self.extra_dev_deps << ['hoe-mercurial', "~> #{VERSION}"] unless
+			self.dependency( 'hoe-mercurial', "~> #{VERSION}", :developer ) unless
 				self.name == 'hoe-mercurial'
 		end
 
@@ -509,6 +511,9 @@ class Hoe
 						error "Version #{version} already has a tag."
 						fail
 					end
+
+					# Ensure that the History file contains an entry for every release
+					Rake::Task[ 'hg:check_history' ].invoke if self.check_history_on_release
 
 					# Sign the current rev
 					if self.hg_sign_tags

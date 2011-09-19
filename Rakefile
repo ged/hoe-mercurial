@@ -21,6 +21,7 @@ hoespec = Hoe.spec "hoe-mercurial" do
 
 	self.spec_extras[:licenses] = ["BSD"]
 	self.hg_sign_tags = true
+	self.check_history_on_release = true
 
 	self.dependency 'hoe', "~> #{Hoe::VERSION[ /\d+\.\d+/ ]}"
 end
