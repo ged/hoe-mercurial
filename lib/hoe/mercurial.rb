@@ -464,10 +464,10 @@ class Hoe
 		### in the history file.
 		def get_unhistoried_version_tags( include_pkg_version=true )
 			prefix = self.hg_release_tag_prefix
-			tag_pattern = /#{}\d+(\.\d+)+/
+			tag_pattern = /#{prefix}\d+(\.\d+)+/
 			release_tags = get_tags().grep( /^#{tag_pattern}$/ )
 
-			release_tags << "#{hg_release_tag_prefix}#{version}" if include_pkg_version
+			release_tags << "#{prefix}#{version}" if include_pkg_version
 
 			IO.readlines( self.history_file ).each do |line|
 				if line =~ /^(?:h\d\.|#+|=+)\s+(#{tag_pattern})\s+/
