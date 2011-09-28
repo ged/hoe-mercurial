@@ -438,7 +438,7 @@ class Hoe
 		include Hoe::RakeHelpers,
 		        Hoe::MercurialHelpers
 
-		VERSION = '1.3.0'
+		VERSION = '1.3.1'
 
 		# The name of the file to edit for the commit message
 		COMMIT_MSG_FILE = 'commit-msg.txt'
@@ -467,7 +467,7 @@ class Hoe
 			tag_pattern = /#{prefix}\d+(\.\d+)+/
 			release_tags = get_tags().grep( /^#{tag_pattern}$/ )
 
-			release_tags << "#{prefix}#{version}" if include_pkg_version
+			release_tags.unshift( "#{prefix}#{version}" ) if include_pkg_version
 
 			IO.readlines( self.history_file ).each do |line|
 				if line =~ /^(?:h\d\.|#+|=+)\s+(#{tag_pattern})\s+/

@@ -1,9 +1,9 @@
-# (Another) Mercurial Plugin for hoe
+= (Another) Mercurial Plugin for hoe
 
 * http://bitbucket.org/ged/hoe-mercurial
 
 
-## Description
+== Description
 
 This is a fork of the [hoe-hg](https://bitbucket.org/mml/hoe-hg) 
 plugin. I forked it because I use quite a few additional Mercurial 
@@ -14,7 +14,7 @@ I've offered to push my changes back up to the original, but I gave
 up waiting for a response.
 
 
-## Examples
+== Examples
 
 	# in your Rakefile
 	Hoe.plugin :mercurial
@@ -23,7 +23,7 @@ If there isn't a '.hg' directory at the root of your project, it won't
 be activated.
 
 
-### Committing
+=== Committing
 
 	$ rake hg:checkin
 
@@ -38,7 +38,7 @@ run tests, lint, or whatever before checking in), builds a commit message
 file out of the diff that's being committed and invokes your editor on it, 
 does the checkin, then offers to push back to the default repo.
 
-### Pre-Release Hook
+=== Pre-Release Hook
 
 This plugin also hooks Hoe's **prerelease** task to tag and (optionally) sign 
 the rev being released, then push to the default repo. If there are any 
@@ -68,7 +68,7 @@ To sign tagged revisions using 'hg sign', do this in your hoespec:
 This requires that 'hg sign' work on its own, of course.
 
 
-### Other Tasks
+=== Other Tasks
 
 It also provides other tasks for pulling, updating, pushing, etc. These
 aren't very useful on their own, as it's usually just as easy to do the
@@ -78,18 +78,18 @@ dependencies in other tasks.
 A 'rake -T' will show them all; they're all in the 'hg' namespace.
 
 
-## Dependencies
+== Dependencies
 
 Hoe and Mercurial, obviously. I haven't tested these tasks with Mercurial
 versions earlier than 1.6 or so.
 
 
-## Installation
+== Installation
 
 	$ gem install hoe-mercurial
 
 
-## License
+== License
 
 The original is used under the terms of the following license:
 

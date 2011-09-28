@@ -15,9 +15,9 @@ Hoe.plugins.delete :rubyforge
 hoespec = Hoe.spec "hoe-mercurial" do
 	self.developer "Michael Granger", "ged@FaerieMUD.org"
 
+	self.history_file     = "History.rdoc"
+	self.readme_file      = "README.rdoc"
 	self.extra_rdoc_files = FileList["*.rdoc"]
-	self.history_file     = "History.md"
-	self.readme_file      = "README.md"
 
 	self.spec_extras[:licenses] = ["BSD"]
 	self.hg_sign_tags = true
