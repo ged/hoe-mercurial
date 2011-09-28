@@ -1,5 +1,6 @@
-lib/hoe/mercurial.rb
 ChangeLog
-History.md
-README.md
+History.rdoc
+Manifest.txt
+README.rdoc
 Rakefile
+lib/hoe/mercurial.rb
