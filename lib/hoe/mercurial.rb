@@ -28,24 +28,24 @@ class Hoe
 		# Set some ANSI escape code constants (Shamelessly stolen from Perl's
 		# Term::ANSIColor by Russ Allbery <rra@stanford.edu> and Zenin <zenin@best.com>
 		ANSI_ATTRIBUTES = {
-			'clear'			 => 0,
-			'reset'			 => 0,
-			'bold'			 => 1,
-			'dark'			 => 2,
-			'underline'	 => 4,
+			'clear'      => 0,
+			'reset'      => 0,
+			'bold'       => 1,
+			'dark'       => 2,
+			'underline'  => 4,
 			'underscore' => 4,
-			'blink'			 => 5,
-			'reverse'		 => 7,
-			'concealed'	 => 8,
+			'blink'      => 5,
+			'reverse'    => 7,
+			'concealed'  => 8,
 
-			'black'			 => 30,		'on_black'	 => 40, 
-			'red'				 => 31,		'on_red'		 => 41, 
-			'green'			 => 32,		'on_green'	 => 42, 
-			'yellow'		 => 33,		'on_yellow'	 => 43, 
-			'blue'			 => 34,		'on_blue'		 => 44, 
-			'magenta'		 => 35,		'on_magenta' => 45, 
-			'cyan'			 => 36,		'on_cyan'		 => 46, 
-			'white'			 => 37,		'on_white'	 => 47
+			'black'      => 30,  'on_black'   => 40,
+			'red'        => 31,  'on_red'     => 41,
+			'green'      => 32,  'on_green'   => 42,
+			'yellow'     => 33,  'on_yellow'  => 43,
+			'blue'       => 34,  'on_blue'    => 44,
+			'magenta'    => 35,  'on_magenta' => 45,
+			'cyan'       => 36,  'on_cyan'    => 46,
+			'white'      => 37,  'on_white'   => 47
 		}
 
 		# Prompt for multiline input
@@ -55,7 +55,7 @@ class Hoe
 		EOF
 
 		# ANSI escapes for clearing to the end of the line and the entire line
-		CLEAR_TO_EOL			 = "\e[K"
+		CLEAR_TO_EOL       = "\e[K"
 		CLEAR_CURRENT_LINE = "\e[2K"
 
 
@@ -485,7 +485,7 @@ class Hoe
 		### Hoe hook -- Define Rake tasks when the plugin is loaded.
 		def define_mercurial_tasks
 			return unless File.exist?( ".hg" ) &&
-			 	!Rake::Task.task_defined?( 'hg:checkin' )
+				!Rake::Task.task_defined?( 'hg:checkin' )
 
 			file COMMIT_MSG_FILE do |task|
 				edit_commit_log( task.name )
@@ -654,7 +654,7 @@ class Hoe
 
 				unless missing_tags.empty?
 					abort "%s needs updating; missing entries for tags: %p" %
-				 		[ self.history_file, missing_tags ]
+						[ self.history_file, missing_tags ]
 				end
 			end
 
