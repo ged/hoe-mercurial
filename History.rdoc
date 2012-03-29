@@ -1,3 +1,8 @@
+== v1.4.0 [2012-03-28] Michael Granger <ged@FaerieMUD.org>
+
+Updated for Hoe 3.
+
+
 == v1.3.1 [2011-09-28] Michael Granger <ged@FaerieMUD.org>
 
 Fixed a bug in the ordering of the tags reported by the
