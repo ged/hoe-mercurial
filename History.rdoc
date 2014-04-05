@@ -1,3 +1,8 @@
+== v1.4.1 [2014-04-05] Michael Granger <ged@FaerieMUD.org>
+
+Use less-specific versioning for added dev dep
+
+
 == v1.4.0 [2012-03-28] Michael Granger <ged@FaerieMUD.org>
 
 Updated for Hoe 3.

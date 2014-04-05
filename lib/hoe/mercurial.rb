@@ -73,7 +73,7 @@ class Hoe
 			attributes = ANSI_ATTRIBUTES.values_at( *attributes ).compact.join(';')
 
 			# $stderr.puts "	attr is: %p" % [attributes]
-			if attributes.empty? 
+			if attributes.empty?
 				return ''
 			else
 				return "\e[%sm" % attributes
@@ -81,7 +81,7 @@ class Hoe
 		end
 
 
-		### Colorize the given +string+ with the specified +attributes+ and return it, handling 
+		### Colorize the given +string+ with the specified +attributes+ and return it, handling
 		### line-endings, color reset, etc.
 		def colorize( *args )
 			string = ''
@@ -126,7 +126,7 @@ class Hoe
 				prompt = make_prompt_string( prompt_string )
 				response = readline( prompt ) || ''
 				response.strip!
-				if block_given? && ! yield( response ) 
+				if block_given? && ! yield( response )
 					error_message( failure_msg + "\n\n" )
 					response = nil
 				end
@@ -146,7 +146,7 @@ class Hoe
 			begin
 				default ||= '~'
 				response = prompt( "%s [%s]" % [ prompt_string, default ] )
-				response = default.to_s if !response.nil? && response.empty? 
+				response = default.to_s if !response.nil? && response.empty?
 
 				trace "Validating response %p" % [ response ]
 
@@ -179,7 +179,7 @@ class Hoe
 				if result.nil? || result.empty?
 					results << default if default && results.empty?
 				else
-					results << result 
+					results << result
 				end
 			end until result.nil? || result.empty?
 
@@ -195,7 +195,7 @@ class Hoe
 			prompt = 'Continue?'
 
 			# If the description looks like a question, use it for the prompt. Otherwise,
-			# print it out and 
+			# print it out and
 			if description.strip.rindex( '?' )
 				prompt = description
 			else
@@ -438,7 +438,7 @@ class Hoe
 		include Hoe::RakeHelpers,
 		        Hoe::MercurialHelpers
 
-		VERSION = '1.4.0'
+		VERSION = '1.4.1'
 
 		# The name of the file to edit for the commit message
 		COMMIT_MSG_FILE = 'commit-msg.txt'
