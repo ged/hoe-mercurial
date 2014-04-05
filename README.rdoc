@@ -116,7 +116,7 @@ The original is used under the terms of the following license:
 
 My modifications are:
 
-	Copyright © 2010 Michael Granger <ged@FaerieMUD.org>
+	Copyright © 2010-2014 Michael Granger <ged@FaerieMUD.org>
 
 and are licensed under the same terms as the original.
 
