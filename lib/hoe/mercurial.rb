@@ -455,7 +455,8 @@ class Hoe
 			self.hg_sign_tags             = false
 			self.check_history_on_release = false
 
-			self.dependency( 'hoe-mercurial', "~> #{VERSION}", :developer ) unless
+			minor_version = VERSION[ /^\d+\.\d+/ ]
+			self.extra_dev_deps << ['hoe-mercurial', "~> #{minor_version}"] unless
 				self.name == 'hoe-mercurial'
 		end
 
